@@ -8,3 +8,4 @@ Gunicorn>=20.0
 Uvicorn>=0.15
 djangorestframework==3.15.1
 psycopg2-binary==2.9.9
+python-dotenv==1.0.1
