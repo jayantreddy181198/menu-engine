@@ -15,9 +15,14 @@ class FoodItemCreateView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self, request, category=None):
-        if category:
-            food_items = FoodItem.objects.filter(category=category)
+    def get(self, request, filter_name=None, filter_data=None):
+        if filter_name and filter_data:
+            if filter_data.lower() == 'true':
+                filter_data = True
+            elif filter_data.lower() == 'false':
+                filter_data = False
+            filter_kwargs = {filter_name: filter_data}
+            food_items = FoodItem.objects.filter(**filter_kwargs)
         else:
             food_items = FoodItem.objects.all()
         serializer = FoodItemSerializer(food_items, many=True)
@@ -59,9 +64,14 @@ class BarItemCreateView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self, request, category=None):
-        if category:
-            bar_items = BarItem.objects.filter(category=category)
+    def get(self, request, filter_name=None, filter_data=None):
+        if filter_name and filter_data:
+            if filter_data.lower() == 'true':
+                filter_data = True
+            elif filter_data.lower() == 'false':
+                filter_data = False
+            filter_kwargs = {filter_name: filter_data}
+            bar_items = BarItem.objects.filter(**filter_kwargs)
         else:
             bar_items = BarItem.objects.all()
         serializer = BarItemSerializer(bar_items, many=True)
