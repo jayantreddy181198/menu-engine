@@ -34,7 +34,7 @@ class FoodItemCreateView(APIView):
         updated_data = []
         if update_all:
             food_items = FoodItem.objects.all()
-            for food_item in food_items:
+            for food_item in food_items: 
                 serializer = FoodItemSerializer(food_item, data=update_data, partial=True)
                 if serializer.is_valid():
                     serializer.save()
